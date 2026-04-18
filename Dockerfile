@@ -22,6 +22,6 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 
 USER nodeuser
-EXPOSE 3000
+EXPOSE 3002
 
 CMD ["sh", "-c", "node_modules/.bin/prisma migrate deploy && node dist/server.js"]

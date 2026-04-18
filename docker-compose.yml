@@ -4,10 +4,10 @@ services:
     container_name: enterprise-backend
     restart: unless-stopped
     ports:
-      - "3002:3000"
+      - "3002:3002"
     environment:
       NODE_ENV: production
-      PORT: 3000
+      PORT: 3002
       DATABASE_URL: postgresql://freedarendeli:Aod25111997.@89.252.179.67:5432/freedarendeli
       REDIS_URL: redis://:Aod25111997.@89.252.179.67:6379
       REDIS_TTL: 3600
