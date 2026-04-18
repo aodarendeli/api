@@ -12,10 +12,13 @@ COPY . .
 RUN pnpm db:generate
 RUN pnpm build
 
-FROM base AS runner
+FROM node:20-slim AS runner
 ENV NODE_ENV=production
-RUN apk add --no-cache openssl
-RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nodeuser
+RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 --ingroup nodejs nodeuser
+
+WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
