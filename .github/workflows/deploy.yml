@@ -68,8 +68,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           source: docker-compose.yml
-          target: ~/enterprise-backend
-          debug: true
+          target: ~/api
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -79,11 +78,14 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            cd ~/enterprise-backend
+            cd ~/api
 
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             export GITHUB_REPOSITORY=${{ github.repository }}
+
+            docker stop api 2>/dev/null || true
+            docker rm api 2>/dev/null || true
 
             docker compose pull app
 
