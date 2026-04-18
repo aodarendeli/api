@@ -14,6 +14,7 @@ RUN pnpm build
 
 FROM base AS runner
 ENV NODE_ENV=production
+RUN apk add --no-cache openssl
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nodeuser
 
 COPY --from=builder /app/dist ./dist
