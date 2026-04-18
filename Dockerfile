@@ -25,6 +25,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 
+RUN node_modules/.bin/prisma generate
 RUN chown -R nodeuser:nodejs /app
 
 USER nodeuser
