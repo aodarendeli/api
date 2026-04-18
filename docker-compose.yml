@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ghcr.io/${GITHUB_REPOSITORY}:latest
+    container_name: enterprise-backend
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://freedarendeli:Aod25111997.@89.252.179.67:5432/freedarendeli
+      REDIS_URL: redis://:Aod25111997.@89.252.179.67:6379
+      REDIS_TTL: 3600
+      LOG_LEVEL: info
+      RATE_LIMIT_WINDOW_MS: 900000
+      RATE_LIMIT_MAX: 100
+      APP_CACHE_PREFIX: app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
