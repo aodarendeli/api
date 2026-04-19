@@ -21,7 +21,7 @@ export function createApp(): Application {
   app.use(rateLimiter);
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-    customSiteTitle: 'Enterprise Backend API',
+    customSiteTitle: 'Ozgur Backend API',
     swaggerOptions: { persistAuthorization: true },
   }));
 
