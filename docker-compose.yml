@@ -7,9 +7,9 @@ services:
       - "3002:3002"
     environment:
       NODE_ENV: production
-      PORT: 3002
-      DATABASE_URL: postgresql://freedarendeli:Aod25111997.@89.252.179.67:5432/freedarendeli
-      REDIS_URL: redis://:Aod25111997.@89.252.179.67:6379
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
+      PORT: ${PORT}
       REDIS_TTL: 3600
       LOG_LEVEL: info
       RATE_LIMIT_WINDOW_MS: 900000
@@ -17,3 +17,8 @@ services:
       APP_CACHE_PREFIX: app
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - proxy 
+networks:
+  proxy:
+    external: true
