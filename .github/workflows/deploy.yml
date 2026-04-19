@@ -83,6 +83,9 @@ jobs:
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             export GITHUB_REPOSITORY=${{ github.repository }}
+            export DATABASE_URL="${{ secrets.DATABASE_URL }}"
+            export REDIS_URL="${{ secrets.REDIS_URL }}"
+            export PORT="${{ secrets.PORT }}"
 
             docker stop api 2>/dev/null || true
             docker rm api 2>/dev/null || true
